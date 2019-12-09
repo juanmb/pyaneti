@@ -57,7 +57,7 @@ a_from_kepler = [True]
 #if you are in my_test uncomment the next line
 #a_from_kepler = [False]
 
-#We want to fit transit and RV 
+#We want to fit transit and RV
 #For a pure RV fit, fit_tr has to be False
 #For a pure TR fit, fit_rv has to be False
 #For multi-planet fits fit_rv and fit_tr have the form [True,True,False,...]
@@ -97,8 +97,8 @@ fit_q2 = 'g'     #We fit q2 with gaussian priors
 #if 'f' is selected for the parameter A, A is fixed to the one given by min_A
 #if 'u' is selected for the parameter A, sets uniform priors between min_A and max_A
 #if 'g' is selected for the parameter A, sets gaussian priors with mean min_A and standard deviation max_A
-min_t0  = [2448285.05] 
-max_t0  = [2448285.15]  
+min_t0  = [2448285.05]
+max_t0  = [2448285.15]
 min_P   = [365.206]
 max_P   = [365.306]
 min_ew1 = [0.0]

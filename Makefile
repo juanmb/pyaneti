@@ -7,29 +7,26 @@
 #    make clean -> removes the pyaneti.so file                            #
 #-------------------------------------------------------------------------#
 
-FP=f2py2.7
-fc=gnu95 
-cc=unix 
+NAME=pyaneti
 
-FLAGS_OMP= -c -m --quiet --f90flags='-fopenmp' 
-FLAGS= -c -m --quiet 
+FP=f2py3
+FC=gnu95
+CC=unix
+
+FLAGS=-c -m --quiet
+FLAGS_OMP=$(FLAGS) --f90flags='-fopenmp'
 LGOMP=-L/usr/lib64/ -lgomp
-SOURCES= src/constants.f90\
-	src/frv.f90\
-	src/ftr.f90\
-	src/quad.f90\
-	src/mcmc.f90\
-	src/bayesian.f90\
-	src/todo.f90
 
-EXECUTABLE=pyaneti
+SRC= $(wildcard src/*.f90)
 
-all: $(EXECUTABLE) 
-$(EXECUTABLE):$(SOURCES)
-	${FP} ${FLAGS} $(EXECUTABLE) $(SOURCES)  --fcompiler=$(fc) --compiler=$(cc)
 
-para: $(EXECUTABLE)
-	${FP} ${FLAGS_OMP} $(EXECUTABLE) $(SOURCES)  --fcompiler=$(fc) ${LGOMP}  --compiler=$(cc)
+all: $(NAME)
+
+$(NAME): $(SRC)
+	${FP} ${FLAGS} $(NAME) $(SRC) --fcompiler=$(FC) --compiler=$(CC)
+
+para: $(NAME)
+	${FP} ${FLAGS_OMP} $(NAME) $(SRC) --fcompiler=$(FC) ${LGOMP} --compiler=$(CC)
 
 clean:
-	rm $(EXECUTABLE).so
+	rm -f $(NAME)*.so

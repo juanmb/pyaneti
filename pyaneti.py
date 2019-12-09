@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/env python
 
 #-----------------------------------------------------------
 #                         pyaneti.py
@@ -7,10 +7,8 @@
 #-----------------------------------------------------------
 
 #Load libraries
-import numpy as np
-import matplotlib.pyplot as plt
-import sys
 import os
+import sys
 import pyaneti as pti #FORTRAN module
 
 #-------------------------------------------------------------
@@ -22,33 +20,33 @@ import pyaneti as pti #FORTRAN module
 star = str(sys.argv[1])
 
 #Create path to the input_fit.py file
-inf_name = 'inpy/'+star+'/input_fit.py'
+INF_NAME = 'inpy/%s/input_fit.py' % star
 
 #Did you create an input_fit.py file?
-if ( not os.path.isfile( inf_name ) ):
-  print 'You have not created', inf_name
-  sys.exit()
+if not os.path.isfile(INF_NAME):
+    print('You have not created', INF_NAME)
+    sys.exit()
 
 #Read the file with all the python functions
-execfile('src/todo-py.py')
+exec(compile(open('src/todo-py.py', "rb").read(), 'src/todo-py.py', 'exec'))
 
 #Read the file with the default values
-execfile('src/default.py')
+exec(compile(open('src/default.py', "rb").read(), 'src/default.py', 'exec'))
 
 #Read input file
-execfile(inf_name)
+exec(compile(open(INF_NAME, "rb").read(), INF_NAME, 'exec'))
 
 #Prepare data
-execfile('src/prepare_data.py')
+exec(compile(open('src/prepare_data.py', "rb").read(), 'src/prepare_data.py', 'exec'))
 
 #Create ouput directory
 outdir = outdir + star + '_out'
 if not os.path.exists(outdir):
-  os.makedirs(outdir)
+    os.makedirs(outdir)
 
 #Obtain smart priors based on iput data
-if (is_smart_priors ):
-  smart_priors()
+if is_smart_priors:
+    smart_priors()
 
 print_init()
 
@@ -62,7 +60,7 @@ joint_fit()
 #             	PRINT AND PLOT ROUTINES
 #-------------------------------------------------------------
 
-execfile('src/output.py')
+exec(compile(open('src/output.py', "rb").read(), 'src/output.py', 'exec'))
 
 #-------------------------------------------------------------
 #             	 END pyaneti.py FILE

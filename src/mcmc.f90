@@ -400,7 +400,7 @@ implicit none
 
     !check if we exceed the maximum number of iterations
     if ( j > maxi ) then
-      print *, 'Maximum number of iteration reached!'
+      print *, 'Maximum number of iterations reached!'
       continua = .FALSE.
     end if
 

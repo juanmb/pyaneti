@@ -1,31 +1,30 @@
 
 #Print the values
-execfile('src/print_values.py')
+exec(compile(open('src/print_values.py', "rb").read(), 'src/print_values.py', 'exec'))
 
 #Create plots
-execfile('src/plot_data.py')
+exec(compile(open('src/plot_data.py', "rb").read(), 'src/plot_data.py', 'exec'))
 
-if ( is_plot_chains ):
-  plot_chains()
+if is_plot_chains:
+    plot_chains()
 #  plot_postiter()
 
-if ( is_corner_plot ):
-  create_corner_plot()
+if is_corner_plot:
+    create_corner_plot()
 else:
-  if ( is_plot_posterior ):
-    plot_posterior()
-
-  if ( is_plot_correlations ):
-    plot_correlations()
+    if is_plot_posterior:
+        plot_posterior()
+    if is_plot_correlations:
+        plot_correlations()
 
  #PLOT TRANSIT
-if ( total_tr_fit ):
-  plot_transit_nice()
-  plot_all_transits()
-  clean_transits(sigma_clean)
-  create_tango_input()
+if total_tr_fit:
+    plot_transit_nice()
+    plot_all_transits()
+    clean_transits(sigma_clean)
+    create_tango_input()
 
 #PLOT RV CURVE
-if ( total_rv_fit ):
-  plot_rv_all_data()
-  plot_rv_mp()
+if total_rv_fit:
+    plot_rv_all_data()
+    plot_rv_mp()
